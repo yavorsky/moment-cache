@@ -39,7 +39,8 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
 ```
 	
 #### Options *(optional)*:
-	*storage: object where cache data is stored. By default - covert object behind the scenes.
+
+ * **storage**: object where cache data is stored. By default - covert object behind the scenes.
   
 
 
