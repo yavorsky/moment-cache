@@ -3,12 +3,13 @@
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-var moment;
-if (typeof require !== 'undefined') {
-	moment = require('moment');
+if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment === null)) {
+	var moment = require('moment');
 }
 
-(function (moment) {
+(function (moment, root) {
+	'use strict';
+
 	var _cache = {};
 	var initCache = function initCache(opts) {
 		if (opts.storage) {
@@ -34,9 +35,8 @@ if (typeof require !== 'undefined') {
 		}
 	};
 
-	var getCache = function getCache(date, format) {
-		var clone = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
-
+	var getCache = function getCache(date, format, clone) {
+		if (clone == null) clone = true;
 		if (typeof format === 'boolean') clone = format;
 		var key = getKey(date);
 		var toMoment = function toMoment(date, format) {
@@ -47,15 +47,14 @@ if (typeof require !== 'undefined') {
 	};
 
 	// const cached = moment().cache()
-	var momentCache = moment.fn.cache = function () {
-		var opts = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
-
+	var momentCache = moment.fn.cache = function (opts) {
+		if (opts == null) opts = {};
 		initCache(opts);
 		return getCache;
 	};
 
-	(typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = momentCache : typeof define === 'function' && define.amd ? define(momentCache) : this.momentCache = momentCache;
-})(moment);
+	(typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = momentCache : typeof define === 'function' && define.amd ? define(momentCache) : root.momentCache = momentCache;
+})(moment, undefined);
 
 },{"moment":2}],2:[function(require,module,exports){
 

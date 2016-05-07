@@ -2,7 +2,7 @@
   "name": "moment-cache",
   "description": "Simple utility to cache moment instances.",
   "author": "Artem Yavorsky",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "repository": {
     "type": "git",
     "url": "git@github.com:yavorsky/moment-cache.git"
@@ -10,7 +10,7 @@
   "scripts": {
     "build": "node build"
   },
-  "main": "./src/moment-cache",
+  "main": "./lib",
   "dependencies": {
     "moment": "~2.13.0"
   },
