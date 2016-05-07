@@ -1,4 +1,6 @@
-# Moment-cache is moment.js-depended tool to speed up your application.
+# moment-cache
+
+### Moment-cache is moment.js-depended tool to speed up your application.
 
 During the app lifecycle we can call moment oftentimes. Every call is time. Time is **performance**. This tool will increase performance of your app by **caching** moment.js instances.
 
@@ -6,7 +8,7 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
 
 ```javascript
 
-	const moment = import 'moment';
+	import moment from 'moment';
 	const cache = moment().cache()
 	const dateString = '2016-08-24';
 	const momentCalls = 99999;
@@ -22,7 +24,7 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
 	}
 
 	console.log(check(moment)) // ~1588 ms
-	console.log(check(cache)) ~35 ms
+	console.log(check(cache)) // ~35 ms
 
 ```
 
