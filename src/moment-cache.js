@@ -4,56 +4,60 @@
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
 if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment === null)) {
-	var moment = require('moment');
+  moment = require('moment');
 }
 
 (function (moment, root) {
-	'use strict';
+  'use strict';
 
-	var _cache = {};
-	var initCache = function initCache(opts) {
-		if (opts.storage) {
-			_cache = opts.storage;
-		}
-	};
-	var getKey = function getKey(date, format) {
-		var dateType = typeof date === 'undefined' ? 'undefined' : _typeof(date);
-		if (dateType === 'string') {
-			var currentKey = Date.parse(date);
-			if (format) {
-				return isNaN(currentKey) ? date : currentKey.toString();
-			} else {
-				return currentKey.toString();
-			}
-		} else if (dateType === 'number') {
-			var currentDate = new Date(dateType);
-			return currentDate.valueOf().toString();
-		} else if (date instanceof Date) {
-			return date.valueOf().toString();
-		} else {
-			return null;
-		}
-	};
+  var _cache = {};
+  var initCache = function initCache(opts) {
+    if (opts.storage) {
+      _cache = opts.storage;
+    }
+  };
+  var getKey = function getKey(date, format) {
+    var dateType = typeof date === 'undefined' ? 'undefined' : _typeof(date);
+    if (dateType === 'string') {
+      var currentKey = Date.parse(date);
+      if (format) {
+        return isNaN(currentKey) ? date : currentKey.toString();
+      } else {
+        return currentKey.toString();
+      }
+    } else if (dateType === 'number') {
+      var currentDate = new Date(dateType);
+      return currentDate.valueOf().toString();
+    } else if (date instanceof Date) {
+      return date.valueOf().toString();
+    } else {
+      return null;
+    }
+  };
 
-	var getCache = function getCache(date, format, clone) {
-		if (clone == null) clone = true;
-		if (typeof format === 'boolean') clone = format;
-		var key = getKey(date);
-		var toMoment = function toMoment(date, format) {
-			var momentResult = moment(date, format);
-			return clone ? momentResult.clone() : momentResult;
-		};
-		return key ? _cache[key] || (_cache[key] = toMoment(date, format)) : toMoment(date, format);
-	};
+  var getCache = function getCache(date, format, clone) {
+    if (clone == null) clone = true;
+    if (typeof format === 'boolean') clone = format;
+    var key = getKey(date);
+    var toMoment = function toMoment(date, format) {
+      var momentResult = moment(date, format);
+      return clone ? momentResult.clone() : momentResult;
+    };
+    return key ? _cache[key] || (_cache[key] = toMoment(date, format)) : toMoment(date, format);
+  };
 
-	// const cached = moment().cache()
-	var momentCache = moment.fn.cache = function (opts) {
-		if (opts == null) opts = {};
-		initCache(opts);
-		return getCache;
-	};
+  for (key in moment) {
+    if (moment.hasOwnProperty(key)) getCache[key] = moment[key];
+  }
 
-	(typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = momentCache : typeof define === 'function' && define.amd ? define(momentCache) : root.momentCache = momentCache;
+  // const cached = moment().cache()
+  var momentCache = moment.fn.cache = function (opts) {
+    if (opts == null) opts = {};
+    initCache(opts);
+    return getCache;
+  };
+
+  (typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = momentCache : typeof define === 'function' && define.amd ? define(momentCache) : root.momentCache = momentCache;
 })(moment, undefined);
 
 },{"moment":2}],2:[function(require,module,exports){
