@@ -11,11 +11,18 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
   'use strict';
 
   var _cache = {};
+
+  var toMoment = function toMoment(date, format, clone) {
+    var momentResult = moment(date, format);
+    return clone ? momentResult.clone() : momentResult;
+  };
+
   var initCache = function initCache(opts) {
     if (opts.storage) {
       _cache = opts.storage;
     }
   };
+
   var getKey = function getKey(date, format) {
     var dateType = typeof date === 'undefined' ? 'undefined' : _typeof(date);
     if (dateType === 'string') {
@@ -39,14 +46,10 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
     if (clone == null) clone = true;
     if (typeof format === 'boolean') clone = format;
     var key = getKey(date);
-    var toMoment = function toMoment(date, format) {
-      var momentResult = moment(date, format);
-      return clone ? momentResult.clone() : momentResult;
-    };
-    return key ? _cache[key] || (_cache[key] = toMoment(date, format)) : toMoment(date, format);
+    return key ? _cache[key] || (_cache[key] = toMoment(date, format, clone)) : toMoment(date, format, clone);
   };
 
-  for (key in moment) {
+  for (var key in moment) {
     if (moment.hasOwnProperty(key)) getCache[key] = moment[key];
   }
 
