@@ -1,14 +1,23 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+var moment = moment || null;
 
 if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment === null)) {
   moment = require('moment');
 }
 
-(function (moment, root) {
+(function (moment, scope) {
   'use strict';
+
+  if (scope == null) {
+    if (typeof self != 'undefined') {
+      scope = self;
+    } else if (typeof root != 'undefined') {
+      scope = root;
+    }
+  }
 
   var _cache = {};
 
@@ -53,16 +62,11 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
     if (moment.hasOwnProperty(key)) getCache[key] = moment[key];
   }
 
-  // const cached = moment().cache()
   var momentCache = moment.fn.cache = function (opts) {
     if (opts == null) opts = {};
     initCache(opts);
     return getCache;
   };
 
-  (typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = momentCache : typeof define === 'function' && define.amd ? define(momentCache) : root.momentCache = momentCache;
+  (typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = momentCache : typeof define === 'function' && define.amd ? define(momentCache) : scope != null ? scope.momentCache = momentCache : null;
 })(moment, undefined);
-
-},{"moment":2}],2:[function(require,module,exports){
-
-},{}]},{},[1]);
