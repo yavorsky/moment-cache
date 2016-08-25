@@ -44,7 +44,7 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
         return currentKey.toString();
       }
     } else if (dateType === 'number') {
-      var currentDate = new Date(dateType);
+      var currentDate = new Date(date);
       return currentDate.valueOf().toString();
     } else if (date instanceof Date) {
       return date.valueOf().toString();
