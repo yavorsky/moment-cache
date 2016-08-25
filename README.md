@@ -48,7 +48,7 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
 	
 #### Methods:
 
-##### **updateStorage**: change cache destination.  
+**updateStorage**: change cache destination.  
  
 ###### **Arguments**:
 
