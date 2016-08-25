@@ -20,6 +20,7 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
   }
 
   var _cache = {};
+  var _prevCache = null;
 
   var toMoment = function toMoment(date, format, clone) {
     var momentResult = moment(date, format);
@@ -28,6 +29,7 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
 
   var initCache = function initCache(opts) {
     if (opts.storage) {
+      if (_prevCache == null) _prevCache = _cache;
       _cache = opts.storage;
     }
   };
@@ -62,11 +64,15 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
     if (moment.hasOwnProperty(key)) getCache[key] = moment[key];
   }
 
-  var momentCache = moment.fn.cache = function (opts) {
-    if (opts == null) opts = {};
-    initCache(opts);
+  getCache.updateStorage = function (storage) {
+    if (storage == null && _prevCache) {
+      storage = _prevCache;
+    };
+    initCache({ storage: storage });
     return getCache;
   };
+
+  var momentCache = moment.fn.cache = getCache;
 
   (typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = momentCache : typeof define === 'function' && define.amd ? define(momentCache) : scope != null ? scope.momentCache = momentCache : null;
 })(initial, undefined);
