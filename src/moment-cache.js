@@ -53,6 +53,8 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
     }
   };
 
+  getCache.version = '0.1.0-beta.1';
+
   var getCache = function getCache(date, format, clone) {
     if (clone == null) clone = true;
     if (typeof format === 'boolean') clone = format;
