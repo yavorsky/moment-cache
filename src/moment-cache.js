@@ -2,6 +2,7 @@
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
+var version = '0.1.0';
 var initial = typeof moment !== 'undefined' ? moment : null;
 
 if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment === null)) {
@@ -53,13 +54,31 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
     }
   };
 
-  getCache.version = '0.1.0-beta.1';
+  var getFromCache = function getFromCache(key, clone) {
+    var cache = _cache[key];
+    if (cache == null) {
+      return;
+    } else {
+      return clone ? _cache[key].clone() : _cache[key];
+    }
+  };
+
+  var addToCache = function addToCache(key, date, format, clone) {
+    var added = _cache[key] = toMoment(date, format, true);
+    return clone ? added.clone() : added;
+  };
 
   var getCache = function getCache(date, format, clone) {
+    var result = void 0;
     if (clone == null) clone = true;
     if (typeof format === 'boolean') clone = format;
     var key = getKey(date);
-    return key ? _cache[key] || (_cache[key] = toMoment(date, format, clone)) : toMoment(date, format, clone);
+    if (key) {
+      result = getFromCache(key, clone) || addToCache(key, date, format, clone);
+    } else {
+      result = toMoment(date, format, clone);
+    }
+    return result;
   };
 
   for (var key in moment) {
@@ -73,6 +92,8 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
     initCache({ storage: storage });
     return getCache;
   };
+
+  getCache.version = version;
 
   var momentCache = moment.fn.cache = getCache;
 
