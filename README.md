@@ -9,7 +9,9 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
 ```javascript
 
 	import moment from 'moment';
-	const cache = moment().cache()
+	import cache  from 'moment-cache';
+	const cachcable = cache();
+
 	const dateString = '2016-08-24';
 	const momentCalls = 99999;
 
@@ -23,8 +25,8 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
 		return new Date - start;
 	}
 
-	console.log(check(moment)) // ~1588 ms
-	console.log(check(cache)) // ~35 ms
+	console.log(check(moment)); 	 // ~1588 ms
+	console.log(check(cacheable)); // ~35 ms
 
 ```
 
@@ -32,15 +34,12 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
 
 ```javascript
 
-	const moment = import 'moment';
-	const cache = moment().cache(options); // options is optional
+	import moment from 'moment';
+	const cache = moment().cache(options);
 	const date = cache('2016-06-28');
 
 ```
 	
-#### Options *(optional)*:
+#### Options:
 
  * **storage**: object where cache data is stored. By default - covert object behind the scenes.
-  
-
-
