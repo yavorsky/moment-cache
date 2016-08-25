@@ -2,10 +2,10 @@
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-var moment = moment || null;
+var initial = typeof moment !== 'undefined' ? moment : null;
 
 if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment === null)) {
-  moment = require('moment');
+  initial = require('moment') || initial;
 }
 
 (function (moment, scope) {
@@ -69,4 +69,4 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
   };
 
   (typeof exports === 'undefined' ? 'undefined' : _typeof(exports)) === 'object' && typeof module !== 'undefined' ? module.exports = momentCache : typeof define === 'function' && define.amd ? define(momentCache) : scope != null ? scope.momentCache = momentCache : null;
-})(moment, undefined);
+})(initial, undefined);
