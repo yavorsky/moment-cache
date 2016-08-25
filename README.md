@@ -10,7 +10,6 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
 
 	import moment from 'moment';
 	import cache  from 'moment-cache';
-	const cachcable = cache();
 
 	const dateString = '2016-08-24';
 	const momentCalls = 99999;
@@ -26,20 +25,39 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
 	}
 
 	console.log(check(moment)); 	 // ~1588 ms
-	console.log(check(cacheable)); // ~35 ms
+	console.log(check(cache));     // ~35 ms
 
 ```
 
 ### Syntax: 
 
+#### Arguments:
+ 
+* date: See [moment/parse](http://momentjs.com/docs/#/parsing/).
+
+* format: See [moment/format](http://momentjs.com/docs/#/parsing/string-format/).
+
+* clone (by default - **true**): set *false* if you are not going to change instance in future. Will increase performance, but any object changes will affect cached result. See [moment/clone](http://momentjs.com/docs/#/parsing/moment-clone/).
+
 ```javascript
 
-	import moment from 'moment';
-	const cache = moment().cache(options);
-	const date = cache('2016-06-28');
+	import cache from 'moment-cache'; // or moment().cache
+	const date = cache('06-28-2016', 'MM-DD-YYYY'); // moment.js cached instance;
 
 ```
 	
-#### Options:
+#### Methods:
 
- * **storage**: object where cache data is stored. By default - covert object behind the scenes.
+##### **updateStorage**: change cache destination.  
+ 
+###### **Arguments**:
+
+* **storage**: object where cache data is stored. By default - covert object behind the scenes.
+
+```javascript
+  import cachable from 'moment-cache';
+  const myStorage = {};
+  cachable.updateStorage(myStorage);
+  const date = cachable('2016-08-23');
+  console.log(myStorage); // {1471899600000: Moment};
+```
