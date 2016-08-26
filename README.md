@@ -8,24 +8,24 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
 
 ```javascript
 
-	import moment from 'moment';
-	import cache  from 'moment-cache';
+  import moment from 'moment';
+  import cache  from 'moment-cache';
 
-	const dateString = '2016-08-24';
-	const momentCalls = 99999;
+  const dateString = '2016-08-24';
+  const momentCalls = 99999;
 
-	const check = (instance) => {
-		let i = 0;
-		const start = new Date;
-		while (i <= momentCalls) {
-			instance(dateString);
-			i++;
-		}
-		return new Date - start;
-	}
+  const check = (instance) => {
+    let i = 0;
+    const start = new Date;
+    while (i <= momentCalls) {
+      instance(dateString);
+      i++;
+    }
+    return new Date - start;
+  }
 
-	console.log(check(moment)); 	 // ~1588 ms
-	console.log(check(cache));     // ~35 ms
+  console.log(check(moment));    // ~1588 ms
+  console.log(check(cache));     // ~35 ms
 
 ```
 
@@ -41,11 +41,14 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
 
 ```javascript
 
-	import cache from 'moment-cache'; // or moment().cache
-	const date = cache('06-28-2016', 'MM-DD-YYYY'); // moment.js cached instance;
+  import cache from 'moment-cache'; // or moment().cache
+  const myDate = '06-28-2016';
+  const format = 'MM-DD-YYYY';
+  const date = cache(myDate, format); // moment.js cached instance;
+  const anotherDate = cache(myDate, format); // rapidly retrieving previously processed result from the cache.
 
 ```
-	
+  
 #### Methods:
 
 **updateStorage**: change cache destination.  
