@@ -44,8 +44,8 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
   import cache from 'moment-cache'; // or moment().cache
   const myDate = '06-28-2016';
   const format = 'MM-DD-YYYY';
-  const date = cache(myDate, format); // moment.js cached instance;
-  const anotherDate = cache(myDate, format); // rapidly retrieving previously processed result from the cache.
+  const date = cache(myDate, format); // moment.js cached instance
+  const anotherDate = cache(myDate, format); // rapidly retrieving previously processed result from the cache
 
 ```
   
@@ -62,5 +62,5 @@ During the app lifecycle we can call moment oftentimes. Every call is time. Time
   const myStorage = {};
   cachable.updateStorage(myStorage);
   const date = cachable('2016-08-23');
-  console.log(myStorage); // {1471899600000: Moment};
+  console.log(myStorage); // {1471899600000: Moment}
 ```
