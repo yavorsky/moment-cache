@@ -38,7 +38,7 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
   var getKey = function getKey(date, format) {
     var dateType = typeof date === 'undefined' ? 'undefined' : _typeof(date);
     if (dateType === 'string') {
-      var currentKey = Date.parse(date);
+      var currentKey = new Date(date);
       if (format) {
         return isNaN(currentKey) ? date : currentKey.toString();
       } else {
@@ -46,9 +46,9 @@ if (typeof require !== 'undefined' && (typeof moment === 'undefined' || moment =
       }
     } else if (dateType === 'number') {
       var currentDate = new Date(date);
-      return currentDate.valueOf().toString();
+      return currentDate.toString();
     } else if (date instanceof Date) {
-      return date.valueOf().toString();
+      return date.toString();
     } else {
       return null;
     }
