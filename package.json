@@ -2,16 +2,17 @@
   "name": "moment-cache",
   "description": "Simple utility to cache moment.js instances.",
   "author": "Artem Yavorsky",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "repository": {
     "type": "git",
     "url": "git@github.com:yavorsky/moment-cache.git"
   },
   "scripts": {
-    "build": "babel ./lib --ignore moment --out-file src/moment-cache.js",
-    "watch": "babel ./lib --watch --ignore moment --out-file src/moment-cache.js"
+    "build": "babel ./lib --ignore moment --out-file moment-cache.js",
+    "prepublish": "npm run build",
+    "watch": "babel ./lib --watch --ignore moment --out-file moment-cache.js"
   },
-  "main": "./src/moment-cache.js",
+  "main": "./moment-cache.js",
   "dependencies": {
     "moment": "~2.15.0"
   },
